@@ -38,4 +38,9 @@ public class UserController {
 			return "202";
 		}
 	}
+
+	@PostMapping("/test")
+	public String check() {
+		return null;
+	}
 }
