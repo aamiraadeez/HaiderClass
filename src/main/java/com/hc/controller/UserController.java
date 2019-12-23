@@ -56,4 +56,10 @@ public class UserController {
 		return ResponseEntity.ok(updatedUser);
 	}
 
+	@PutMapping("/extraMethod")
+	public String ExtraMethod(@RequestBody UserModel user) throws Exception {
+
+		return "";
+	}
+
 }
