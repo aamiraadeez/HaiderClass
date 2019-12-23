@@ -1,12 +1,14 @@
 package com.hc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hc.dao.DaoIface;
 import com.hc.model.UserModel;
 import com.hc.service.ServiceIface;
 
@@ -16,9 +18,12 @@ public class UserController {
 
 	@Autowired
 	ServiceIface service;
+	@Autowired
+	DaoIface dao;
 
 	@PostMapping(value = "/UserValidation")
 	public String UserValidations(@RequestBody UserModel user) {
+		System.out.println("from UserValidations");
 		String uservalidationsstatus = service.validateUser(user);
 		if (uservalidationsstatus.equals("200")) {
 			return "Succesfully login...";
@@ -29,6 +34,7 @@ public class UserController {
 
 	@PostMapping("/saveUser")
 	public String saveUser(@RequestBody UserModel user) {
+		System.out.println("from save User: ");
 		String saveStatus = service.saveUser(user);
 		if (saveStatus.equals("200")) {
 			return "200";
@@ -39,8 +45,15 @@ public class UserController {
 		}
 	}
 
-	@PostMapping("/test")
-	public String check() {
-		return null;
+	@PutMapping("/editUser")
+	public ResponseEntity<UserModel> editUser(@RequestBody UserModel user) throws Exception {
+		UserModel usermodel = dao.findById(user.getUserId())
+				.orElseThrow(() -> new Exception("User not found on :: " + user.getUserId()));
+		usermodel.setEmail(user.getEmail());
+		usermodel.setName(user.getName());
+		usermodel.setPhone(user.getPhone());
+		final UserModel updatedUser = dao.save(usermodel);
+		return ResponseEntity.ok(updatedUser);
 	}
+
 }
