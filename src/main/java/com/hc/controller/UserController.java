@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.web.servlet.ModelAndView;
-
 import com.hc.dao.DaoIface;
 import com.hc.model.UserModel;
 import com.hc.service.ServiceIface;
@@ -42,7 +40,6 @@ public class UserController {
 		} else {
 			return "";
 		}
-
 	}
 
 	@PostMapping("/saveUser")
@@ -67,12 +64,5 @@ public class UserController {
 		usermodel.setPhone(user.getPhone());
 		final UserModel updatedUser = dao.save(usermodel);
 		return ResponseEntity.ok(updatedUser);
-	}
-
-	@PutMapping("/extraMethod")
-	public String ExtraMethod(@RequestBody UserModel user) throws Exception {
-
-		return "";
-
 	}
 }
