@@ -13,9 +13,15 @@ public class ServiceImpl implements ServiceIface {
 
 	@Override
 	public String validateUser(UserModel user) {
+
 		int checkemailExist = dao.findByEmail(user.getEmail());
 		if (checkemailExist == 1) {
-			return "200";
+			int checkpasswordExist = dao.verifyUserByPassword(user.getEmail(), user.getPassword());
+			if (checkpasswordExist == 1) {
+				return "200";
+			} else {
+				return "400";
+			}
 		} else {
 			return "404";
 		}

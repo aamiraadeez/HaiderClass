@@ -12,4 +12,7 @@ public interface DaoIface extends JpaRepository<UserModel, Long> {
 
 	@Query("select count(*) from UserModel where email=:email ")
 	int findByEmail(@Param("email") String email);
+
+	@Query("select count (*) from UserModel where email=:email and password=:password ")
+	int verifyUserByPassword(@Param("email") String email, @Param("password") String password);
 }
