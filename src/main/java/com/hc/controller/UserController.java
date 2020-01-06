@@ -24,7 +24,7 @@ public class UserController {
 	DaoIface dao;
 
 	@GetMapping("/login")
-	public ModelAndView forget() {
+	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
 	}
@@ -32,6 +32,12 @@ public class UserController {
 	@GetMapping("/dashboard")
 	public ModelAndView calldashboard() {
 		ModelAndView mav = new ModelAndView("dashboard");
+		return mav;
+	}
+
+	@GetMapping("/signup")
+	public ModelAndView sign() {
+		ModelAndView mav = new ModelAndView("signup");
 		return mav;
 	}
 
@@ -45,8 +51,8 @@ public class UserController {
 			return ResponseEntity.badRequest().body(uservalidationsstatus);
 		}
 	}
-
-	@PostMapping("/saveUser")
+	
+	@PostMapping("/addUser")
 	public String saveUser(@RequestBody UserModel user) {
 		System.out.println("from save User: ");
 		String saveStatus = service.saveUser(user);

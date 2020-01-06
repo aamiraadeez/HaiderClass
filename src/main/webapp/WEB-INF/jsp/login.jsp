@@ -27,8 +27,8 @@
 			async : true,
 			success : function(result, textStatus, xhr) {
 				debugger;
-				console.log("text: "+textStatus);
-				console.log("response: "+xhr);
+				console.log("text: " + textStatus);
+				console.log("response: " + xhr);
 				window.location.replace("/agents/dashboard");
 			},
 			error : function(message, textStatus, errorThrown) {
@@ -39,7 +39,6 @@
 						JSON.stringify(message.responseJSON, undefined, 2));
 			}
 		});
-
 	}
 </script>
 </head>
@@ -50,6 +49,7 @@
 	<input type="text" id="password" name="password">
 	<br>
 	<button type="submit" onclick="myFunction()">Login</button>
-	<a href="newRegistertation">register</a>
+<!-- 	<a href="signup.jsp">register</a> -->
+	<a href="signup">Forget Password</a>
 </body>
 </html>
