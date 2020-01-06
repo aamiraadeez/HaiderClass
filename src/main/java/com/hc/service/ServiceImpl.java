@@ -1,6 +1,7 @@
 package com.hc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.hc.dao.DaoIface;
 import com.hc.model.UserModel;
@@ -11,18 +12,21 @@ public class ServiceImpl implements ServiceIface {
 	DaoIface dao;
 
 	@Override
-	public String validateUser(UserModel user) {
-
+	public ResponseEntity<UserModel> validateUser(UserModel user) {
+		UserModel usermodel = new UserModel();
 		int checkemailExist = dao.findByEmail(user.getEmail());
 		if (checkemailExist == 1) {
 			int checkpasswordExist = dao.verifyUserByPassword(user.getEmail(), user.getPassword());
 			if (checkpasswordExist == 1) {
-				return "200";
+				usermodel.setStatus("Succesfully login...");
+				return ResponseEntity.ok(usermodel);
 			} else {
-				return "400";
+				usermodel.setStatus("Incorrect password");
+				return ResponseEntity.badRequest().body(usermodel);
 			}
 		} else {
-			return "404";
+			usermodel.setStatus("Email and password does not exist");
+			return ResponseEntity.badRequest().body(usermodel);
 		}
 	}
 

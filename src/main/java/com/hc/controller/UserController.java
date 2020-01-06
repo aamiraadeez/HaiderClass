@@ -1,6 +1,7 @@
 package com.hc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,17 +29,20 @@ public class UserController {
 		return mav;
 	}
 
+	@GetMapping("/dashboard")
+	public ModelAndView calldashboard() {
+		ModelAndView mav = new ModelAndView("dashboard");
+		return mav;
+	}
+
 	@PostMapping(value = "/UserValidation")
-	public String UserValidations(@RequestBody UserModel user) {
-		String uservalidationsstatus = service.validateUser(user);
-		if (uservalidationsstatus.equals("200")) {
-			return "Succesfully login...";
-		} else if (uservalidationsstatus.equals("400")) {
-			return "Incorrect password";
-		} else if (uservalidationsstatus.equals("404")) {
-			return "Email and password does not exist";
+	public ResponseEntity<?> UserValidations(@RequestBody UserModel user) {
+		ResponseEntity<UserModel> uservalidationsstatus = service.validateUser(user);
+		HttpStatus httpcode = uservalidationsstatus.getStatusCode();
+		if (httpcode == HttpStatus.OK) {
+			return ResponseEntity.ok(uservalidationsstatus);
 		} else {
-			return "";
+			return ResponseEntity.badRequest().body(uservalidationsstatus);
 		}
 	}
 

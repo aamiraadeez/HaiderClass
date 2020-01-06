@@ -37,6 +37,12 @@ public class UserModel {
 	@Column(name = "phone")
 	private String phone;
 
+	@Column(name = "status")
+	private String status;
+
+	public UserModel() {
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -101,13 +107,19 @@ public class UserModel {
 		this.phone = phone;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "UserModel [userId=" + userId + ", role=" + role + ", name=" + name + ", email=" + email + ", password="
-				+ password + ", gender=" + gender + ", address=" + address + ", phone=" + phone + "]";
-	}
-
-	public UserModel() {
+				+ password + ", gender=" + gender + ", address=" + address + ", phone=" + phone + ", status=" + status
+				+ "]";
 	}
 
 }
