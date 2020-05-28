@@ -1,7 +1,6 @@
 package com.hc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +14,7 @@ import com.hc.service.ServiceIface;
 @RestController
 @RequestMapping("/agents")
 public class UserController {
+
 	@Autowired
 	ServiceIface service;
 
@@ -27,6 +27,7 @@ public class UserController {
 	@PostMapping(value = "/UserValidation")
 	public String UserValidations(@RequestBody UserModel user) {
 		String uservalidationsstatus = service.validateUser(user);
+	
 		if (uservalidationsstatus.equals("200")) {
 			return "Succesfully login...";
 		} else if (uservalidationsstatus.equals("400")) {
@@ -36,12 +37,12 @@ public class UserController {
 		} else {
 			return "";
 		}
-
 	}
 
 	@PostMapping("/saveUser")
 	public String saveUser(@RequestBody UserModel user) {
 		String saveStatus = service.saveUser(user);
+
 		if (saveStatus.equals("200")) {
 			return "200";
 		} else if (saveStatus.equals("202")) {
