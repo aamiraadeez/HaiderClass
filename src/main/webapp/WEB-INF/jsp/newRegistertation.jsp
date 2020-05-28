@@ -7,14 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<h1>Registration</h1>
 
 	<form action="addUser" method="post" id="sign-up"
 		enctype="multipart/form-data">
 
 		<div class="row">
+
 			<div class="col-md-4">
+
 				<div class="form-group">
+
 					<label class="bmd-label-floating">Role</label> <select
 						class="form-control" name="role" id="role">
 						<option>Admin</option>
@@ -24,7 +28,9 @@
 			</div>
 
 			<div class="col-md-4">
+
 				<div class="form-group">
+
 					<label class="bmd-label-floating">First Name</label> <input
 						type="text" class="form-control" name="firstName" id="firstName"
 						maxlength="20">

@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<form action="UserValidation" method="post">
 		Email:<input type="text" id="email" name="email"> <br>
 		Password: <input type="text" id="password" name="password"><br>
 		<button type="submit">Login</button>
 	</form>
+
 	<a href="newRegistertation">register</a>
 </body>
 </html>
